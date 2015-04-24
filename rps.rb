@@ -34,5 +34,3 @@ begin
   done = gets.chomp
   system("clear")
 end while done == "y"
-
-
