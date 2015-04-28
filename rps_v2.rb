@@ -15,10 +15,10 @@ begin
   puts "#{user_name}! Choose rock(r), paper(p), or scissors(s) to begin game."
   design
   
-  player_input = gets.chomp.downcase[0]
+  player_input = gets.downcase[0]
   computer_choice = CHOICES.values.sample
 
-  if player_input == 'r' || player_input == 's' || player_input == 'p'
+  if %w(p r s).include? player_input
     if player_input[0] == computer_choice[0]
       puts "#{user_name} choose #{player_input} and Computer choose #{computer_choice}." 
       puts "Its a Tie!"
@@ -44,7 +44,7 @@ begin
   system("clear")
   puts "#{user_name} has: #{player_score}"
   puts "Computer has : #{computer_score}"
-end while done == "y"
+end while done != "n"
 
 system("clear")
 puts "Thanks for playing 'Rock, Paper, Scissors'. Heres your final score:"
