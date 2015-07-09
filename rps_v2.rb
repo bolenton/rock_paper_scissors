@@ -4,7 +4,10 @@ def design
   puts "*********************************************"
 end
 
+design
+puts "Welcome to Rock, Paper, Scissors game!"
 puts "What is your name player?"
+design
 user_name = gets.chomp.capitalize
 
 player_score = 0
@@ -47,6 +50,7 @@ begin
 end while done != "n"
 
 system("clear")
+
 puts "Thanks for playing 'Rock, Paper, Scissors'. Heres your final score:"
 design
 puts "#{user_name}: #{player_score}"
