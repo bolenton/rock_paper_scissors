@@ -12,6 +12,7 @@ class Human
 
   def self.player_choice(player_name)
     puts "#{player_name.capitalize}! Choose rock(r), paper(p), or scissors(s) to begin game."
+    puts " "
     gets.chomp
   end
 
@@ -37,6 +38,7 @@ class GamePlay
 
   def welcome
     puts "Welcome to Rock, Paper, Scissors game!"
+    puts "If you can aquire 50 points befor I do, you win!"
   end
 
   def design
@@ -47,9 +49,9 @@ class GamePlay
     system("clear")
   end
 
-  def self.show_choice(computer_choice, player_choice)
-    puts "computer choose #{computer_choice}"
-    puts "player choose #{player_choice}"
+  def self.show_choice(player_choice, computer_choice, player_name)
+    puts "#{player_name} choose #{player_choice}"
+    puts "Computer choose #{computer_choice}"
   end
 
   def self.compare(player_choice, computer_choice, design, player, computer)
@@ -57,20 +59,32 @@ class GamePlay
     if %w(p r s).include? player_choice
       if player_choice[0] == computer_choice[0]
         puts "Its a Tie!"
-        design
+        puts "Loading next round" 
+        6.times do puts "..." 
+          sleep(1)
+        end
       elsif player_choice[0] == 'rock'[0]     && computer_choice[0] == 'scissors'[0] || 
         player_choice[0] == 'paper'[0]    && computer_choice[0] == 'rock'[0]     || 
         player_choice[0] == 'scissors'[0] && computer_choice[0] == 'paper'[0]
         puts "Y O U   W I N  !  !  !"
-        design
+        6.times do puts "..." 
+          sleep(1)
+        end
         player.player_score += 10
       else
         puts "Y O U   L O S E  !  !  !"
-        design
+        puts "Loading next round"
+        6.times do puts "..."
+          sleep(1)  
+        end
         computer.computer_score += 10
       end
     else 
       puts "Thats not a valid response."
+      puts "Loading next round" 
+      6.times do puts "..."
+        sleep(1)  
+      end 
     end
   end
 
@@ -86,16 +100,22 @@ class GamePlay
     begin
       player_choice = Human.player_choice(player_name)
       computer_choice = Computer.computer_choice
+      puts " "
       design
-      GamePlay.show_choice(player_choice, computer_choice)
+      GamePlay.show_choice(player_choice, computer_choice, player_name)
       GamePlay.compare(player_choice, computer_choice, design, player, computer)
-      puts "Play again (y/n)"
-      done = gets.chomp.downcase
       clear
+      design
       puts "#{player_name} has: #{player.player_score}"
       puts "Computer has : #{computer.computer_score}"
-    end while done != "n"
+      design
+    end until player.player_score == 50 || computer.computer_score == 50
     clear
+    if player.player_score == 50 
+      puts "CONGRATZ YOU BEAT ME!"
+    else
+      puts "Better Luck next time."
+    end
     puts "FINAL SCORE"
     design
     puts "#{player_name.capitalize}: #{player.player_score}"
@@ -105,4 +125,3 @@ class GamePlay
 end
 
 rps = GamePlay.new.run
-
