@@ -11,7 +11,7 @@ class Human
   end
 
   def self.player_choice(player_name)
-    puts "#{player_name.capitalize}! Choose rock(r), paper(p), or scissors(s) to begin game."
+    puts "#{player_name.capitalize}! Choose one to begin the game: \n(r) rock \n(p) paper \n(s) scissors"
     puts " "
     gets.chomp
   end
@@ -67,14 +67,15 @@ class GamePlay
         player_choice[0] == 'paper'[0]    && computer_choice[0] == 'rock'[0]     || 
         player_choice[0] == 'scissors'[0] && computer_choice[0] == 'paper'[0]
         puts "Y O U   W I N  !  !  !"
-        6.times do puts "..." 
+        puts "Loading next round"
+        5.times do puts "..." 
           sleep(1)
         end
         player.player_score += 10
       else
         puts "Y O U   L O S E  !  !  !"
         puts "Loading next round"
-        6.times do puts "..."
+        5.times do puts "..."
           sleep(1)  
         end
         computer.computer_score += 10
@@ -82,7 +83,7 @@ class GamePlay
     else 
       puts "Thats not a valid response."
       puts "Loading next round" 
-      6.times do puts "..."
+      5.times do puts "..."
         sleep(1)  
       end 
     end
@@ -110,11 +111,12 @@ class GamePlay
       puts "Computer has : #{computer.computer_score}"
       design
     end until player.player_score == 50 || computer.computer_score == 50
+    
     clear
     if player.player_score == 50 
-      puts "CONGRATZ YOU BEAT ME!"
+      puts "CONGRAT! YOU BEAT ME!"
     else
-      puts "Better Luck next time."
+      puts "Sorry you lose. Better Luck next time."
     end
     puts "FINAL SCORE"
     design
